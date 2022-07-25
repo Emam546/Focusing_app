@@ -1,15 +1,15 @@
 import os
 from pywidgets.tk.func import bind_all_childes
 import os,sys
-sys.path.append((os.path.dirname(__file__)))
-from widget import *
+from achievments_widget.widget import *
 from tkinter import *
 from tkinter import ttk
 from PIL import Image,ImageTk
 import datetime
-FILE_PATH= os.path.dirname(__file__)+"\\"
-RIGHTARROW=Image.open((FILE_PATH if FILE_PATH!="\\" else "")+"icons\\go_right.png")
-DOWNARROW=Image.open((FILE_PATH if FILE_PATH!="\\" else "")+"icons\\down-arrow2.png")
+os.path.abspath
+FILE_PATH=os.path.dirname(__file__)
+RIGHTARROW=Image.open(os.path.join(FILE_PATH,"icons\\go_right.png"))
+DOWNARROW=Image.open(os.path.join(FILE_PATH,"icons\\down-arrow2.png"))
 CATEGRIES={0:None}
 CONTAINER_FRAME_STYLE=dict(padx=14,pady=2)
 class Title_Explorebar(Acivment_label):
@@ -40,7 +40,6 @@ class Title_Explorebar(Acivment_label):
         bind_all_childes(self.iconframe,lambda e:self._hide(),"<Button-1>")
         
         super().get_item(self.information_frame)
-
     def append_item(self):
         self.title_frame.grid(row=0,column=0,sticky=NSEW)
         self.iconframe.grid(row=0,column=0,sticky=NE)

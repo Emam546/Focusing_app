@@ -1,8 +1,7 @@
 import datetime
 from tkinter import *
-
 import datetime
-import voice
+import  achievments_widget.voice as voice
 
 
 
@@ -54,8 +53,7 @@ class Acivment_label(Frame):
         self._time=StringVar()
         self._time.set(time)
         self._every_time=StringVar()
-        self._every_time.set(every_time)
-        
+        self._every_time.set(every_time)       
     #create for sub
     def get_item(self,parent:Widget):
         parent.columnconfigure(0,weight=1)   
