@@ -3,8 +3,8 @@ from tkinter import *
 from pywidgets.tk.Verticle_Frame import VerticalScrolledFrame
 import os,sys
 from pathlib import Path
-from achievments_widget import Description_title_explore
-class Achivements_widget(VerticalScrolledFrame,list):
+from ..achievement_widget import Description_title_explore
+class Achievement_widget(VerticalScrolledFrame,list):
     def __init__(self, app=None,added_day:date=date.today(),data:list=[], scrolling=True, **kw):
         super().__init__(app, scrolling,  **kw)
         self.canvas.config(width=4000)

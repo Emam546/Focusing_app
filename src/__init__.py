@@ -1,5 +1,5 @@
 from tkinter import *
-from main_widget import Dayswidget
+from src.main_widget import Dayswidget
 from tkinter import messagebox
 from datetime import datetime
 import os
@@ -37,5 +37,4 @@ class APP(Tk):
             break
         else:
             self.destroy()
-        
-        
+

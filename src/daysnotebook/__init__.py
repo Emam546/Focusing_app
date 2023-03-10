@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import *
-from pywidgets.tk.Notebook.note_origin import Swithcher_window
+from pywidgets.tk.Notebook.note_origin import Switcher_window
 import datetime
 import calendar
 
@@ -17,7 +17,7 @@ def week_days(time:datetime.date=datetime.date.today()):
     weekdays.sort(key=datetime.datetime.weekday)
     return weekdays
 
-class Dayswidget(Swithcher_window):
+class Dayswidget(Switcher_window):
     def __init__(self, app=None, data: dict = {}, **kwargs):
         super().__init__(app, **kwargs)
 

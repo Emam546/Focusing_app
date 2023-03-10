@@ -1,12 +1,12 @@
 from functools import partial
 from tkinter import *
-from pywidgets.tk.Notebook.note_origin import Swithcher_window
+from pywidgets.tk.Notebook.note_origin import Switcher_window
 from datetime import datetime, timedelta,date
-from list_arranger import Achivements_widget as _Achivements_widget ,Description_title_explore
-from daysnotebook import Title_widget
+from .list_arranger import Achievement_widget as _Achievement_widget ,Description_title_explore
+from .daysnotebook import Title_widget
 from pywidgets.tk.func import bind_all_childes
 import pickle
-class Achivements_widget(_Achivements_widget):
+class Achievement_widget(_Achievement_widget):
     def append_item(self, widget: Description_title_explore,menu=True):
         super().append_item(widget)
         def destroy():
@@ -18,7 +18,7 @@ class Achivements_widget(_Achivements_widget):
         add_menu_pope.add_command(label="remove",command=destroy)
         bind_all_childes(widget.title_frame,lambda e:popemenu(),"<Button-3>","")
         return widget
-class Dayswidget(Swithcher_window):
+class Dayswidget(Switcher_window):
     def __init__(self, app=None ,data: dict = {}, **kwargs):
         super().__init__(app, **kwargs)
         self.title_widget=Label(self,anchor=W)
@@ -63,24 +63,23 @@ class Dayswidget(Swithcher_window):
         for widget in self:
             if  widget.day==day:
                 return widget
-         
     def getitem(self,addedday:date=date.today(),data:list=[]):
         assert(type(addedday)==date)
         
-        widget=Achivements_widget(self.container_frame,addedday)
+        widget=Achievement_widget(self.container_frame,addedday)
 
         
         if widget.day>=date.today():
             Button(widget.interior,text="add task",command=widget.add_item).grid(row=widget.interior.grid_size()[1],column=0)
-        #we do this fo the button add as a frsit column
-        #we shoudn't do thsi
+        #we do this fo the button add as a first column
+        #we shouldn't do this
         for val in data:
             widget.add_item(**val)
         return widget
     def add(self,day:date,data):
         assert(type(day)==date)
         return self.is_in(day) if self.is_in(day)!=None else self.append_item(self.getitem(day,data))
-    def _active(self, widget: Achivements_widget,_=None):
+    def _active(self, widget: Achievement_widget,_=None):
         assert (widget!=None)
         self.title_widget["text"]=widget.day.strftime("%b %a")
         if widget.day== date.today():
@@ -99,8 +98,8 @@ class Dayswidget(Swithcher_window):
         )
     def get_keys(self,covert_json=False):
         the_dict={}
-        #return widgets in the swithcer
-        #return achivemnts days
+        #return widgets in the switcher
+        #return achievements days
         for day in self:
             the_value=list(day.get_keys())
             if covert_json:
@@ -126,7 +125,7 @@ def main():
     data=Dayswidget.load_file("save.pkl","rb")
     days_widget=Dayswidget(root,data)
     days_widget.forward(0)
-   
+
     days_widget.active_by_day(datetime.now().date())
     days_widget.pack(fill=BOTH,expand=YES)
     Button(text="get keys",command=lambda:print(days_widget.get_keys())).pack()
