@@ -1,3 +1,2 @@
 pywidgets==0.0.1
-pillow
 pyttsx3
