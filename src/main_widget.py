@@ -1,5 +1,4 @@
 from functools import partial
-import pprint
 from tkinter import *
 from pywidgets.tk.Notebook.note_origin import Switcher_window
 from datetime import datetime, timedelta, date
