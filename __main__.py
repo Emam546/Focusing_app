@@ -1,11 +1,10 @@
 from src import *
+from src.utils import resource_path
 
 
 def main():
     root = APP()
-    root.title("Foucsing")
-    root.iconbitmap(default="build/icon.ico")
-    root.iconbitmap("build/icon.ico")
+    root.title("Focusing")
     root.mainloop()
 
 

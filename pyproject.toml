@@ -6,14 +6,19 @@ authors = [
     {name = "Emam546",email = "emam54637@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.10,<3.14"
 dependencies = [
     "pyttsx3 (>=2.98,<3.0)",
     "pywidgets (>=0.0.1,<0.0.2)",
-    "pillow (==9.5.0)"
+    "pillow (==9.5.0)",
+    "pystray (>=0.19.5,<0.20.0)"
 ]
 
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pyinstaller = "^6.12.0"
+
