@@ -1,0 +1,42 @@
+name: Build and Release Tkinter App
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Poetry
+        run: |
+          pip install poetry
+          poetry --version
+      - name: Install Dependencies with Poetry
+        run: poetry install
+      - name: Extract Version from pyproject.toml
+        id: get_version
+        run: echo "APP_VERSION=$(poetry version -s)" >> $GITHUB_ENV
+      - name: Build Executable with PyInstaller
+        run: poetry run pyinstaller focusing.spec --workpath ./out --distpath ./dist
+
+      - name: Install Inno Setup
+        run: choco install innosetup --yes
+
+      - name: Build Installer with Inno Setup
+        run: iscc setup.iss
+
+      - name: Upload Installer to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/focusing-app-%APP_VERSION%-win.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
