@@ -23,9 +23,6 @@ jobs:
           poetry --version
       - name: Install Dependencies with Poetry
         run: poetry install
-      - name: Extract Version from pyproject.toml
-        id: get_version
-        run: echo "APP_VERSION=$(poetry version -s)" >> $GITHUB_ENV
       - name: Build Executable with PyInstaller
         run: poetry run pyinstaller focusing.spec --workpath ./out --distpath ./dist
 
@@ -38,6 +35,6 @@ jobs:
       - name: Upload Installer to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/focusing-app-${{ env.APP_VERSION }}-win.exe
+            files: dist/focusing-app-*-win.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
